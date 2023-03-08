@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+struct node*next;
+int data;
+}node;
+typedef struct
+{
+node*start;
+}LL;
+void push(LL*l,int ele)
+{
+node*newrec;
+newrec=(node*)malloc(sizeof(node));
+newrec->data=ele;
+newrec->next=l->start;
+l->start=newrec;
+}
+void display(LL*l){
+node*p;
+p=l->start;
+if(p==NULL)
+{
+printf("empty\n");
+return;
+}
+while(p!=NULL)
+{
+printf("%d\t",p->data);
+p=p->next;
+}
+printf("\n");
+}
+int pop(LL*l)
+{
+node*p;
+if(l->start==NULL){
+return -1;
+}
+p=l->start;
+l->start=l->start->next;
+p->next=NULL;
+return p->data;
+}
+int stacktop(LL*l)
+{
+if(l->start==NULL)
+return -1;
+else
+return l->start->data;
+}
+int main()
+{
+int ch,ele;
+LL l;
+l.start=NULL;
+while(1)
+{
+printf("1:push\t2:pop\t3:stacktop\t4:display\t5:exit\nEnter choice=");
+scanf("%d",&ch);
+if(ch==5)
+break;
+switch(ch)
+{
+case 1:printf("enter element to push\n");
+ scanf("%d",&ele);
+ push(&l,ele);
+ display(&l);break;
+case 2:ele=pop(&l);
+ if(ele==-1)
+ printf("empty\n");
+ else
+ printf("element popped is %d\n");
+printf("updated list=\n");
+
+ display(&l);break;
+case 3:ele=stacktop(&l);
+ if(ele==-1)
+ printf("empty\n");
+ else
+ printf("stacktop is %d\n");
+ break;
+case 4:display(&l);break;
+case 5:printf("invalid choice\n"); 
+}
+}return 0;
+}
