@@ -1,0 +1,91 @@
+#include<stdio.h>
+#define MAX 5
+typedef struct
+{
+int a[MAX];
+int front,rear;
+}queue;
+enqueue(queue*q,int ele)
+{
+if(q->rear==MAX-1)
+{
+printf("queue overflow\n");
+}
+q->rear++;
+q->a[q->rear]=ele;
+}
+int isempty(queue*q)
+{
+if(q->rear+1==front)
+return 1;
+else
+return 0;
+}
+int dequeue(queue*q,int ele)
+{
+int x;
+if(isempty(q))
+{
+return -1;
+}
+x=q->a[q->front];
+ q->front++;
+return x;
+}
+int queuefront(queue*q)
+{
+if(isempty(q)) front
+return -1;
+else
+return q->a[q->front];
+}
+void display(queue*q)
+{
+int i;
+if(isempty(q))
+{
+printf("queue underflow\n");
+return;
+}
+for(i=q->front+1;i<=q->rear;i++)
+{
+printf("%d\t",q->a[i]);
+Printf(“\n”);
+}
+}
+int main()
+{
+int ch,ele;
+queue q;
+q.front=0;
+q.rear=-1;
+while(1)
+{
+printf("1:ENQUEUE\t2:DEQUEUE\t3:QUEUEUEFRONT\t4:DISPLAY\t5:EXIT\nEnter 
+choice\n");
+scanf("%d",&ch);
+if(ch==5)
+break;
+switch(ch)
+{
+case 1:printf("enter element to enqueue\n");
+ scanf("%d",&ele);
+ enqueue(&q,ele);
+ break;
+ 
+ case 2:ele=dequeue(&q,ele);
+ if(ele==-1)
+ printf("queue underflow\n");
+ else
+ printf("element dequeued is %d.",ele);break;
+case 3: ele=queuefront(&q);
+ if(ele==-1)
+ printf("queue underflow\n");
+ else
+ printf("queuefront element is %d ..",ele);break; 
+ case 4:display(&q); break;
+default:printf("invalid choice\n"); 
+}
+}
+return 0;
+}
